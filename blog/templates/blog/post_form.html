@@ -1,5 +1,6 @@
 {% extends 'blog/base.html' %}
 {% load crispy_forms_tags %}
+{% load static %}
 {% block content %}
     <div class="content-section">
         <form method="POST">
@@ -9,6 +10,18 @@
                     Blog Post
                 </legend>
                 {{ form|crispy }}
+                <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+                <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+                <script>
+                    CKEDITOR.replace('id_content', {
+                        extraPlugins: 'autogrow',
+                        autoGrow_minHeight: 200,
+                        autoGrow_maxHeight: 600,
+                        autoGrow_bottomSpace: 50,
+                        removePlugins: 'resize'
+                    });
+                </script>
+                <script>$(".django-ckeditor-widget").removeAttr('style');</script>
                 <div class="form-group">
                     <button class="btn btn-outline-info" type="submit">Post</button>
                 </div>
