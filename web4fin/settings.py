@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-
+import json
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -19,8 +19,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
+with open(os.path.join(BASE_DIR, 'config.json')) as config_file:
+    config = json.load(config_file)
+
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'r(iipt=zq28_90z=94%c@m5f*0yd034a75_m)a2e*ap_&pc77g'
+SECRET_KEY = config['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -85,7 +89,7 @@ DATABASES = {
         'USER': 'webadmin',
         'PASSWORD': 'webadmin@',
         'HOST': 'localhost',
-        'PORT': '5432',
+        'PORT': '',
     },
     'default_sqlite': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -116,7 +120,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'zh-hans'
+LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Australia/NSW'
 
@@ -130,8 +134,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
-STATIC_ROOT = "/var/www/prawn-dumplings/static/"
+
+# STATIC_ROOT = "/var/www/prawn-dumplings/static/"
 
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -148,6 +154,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  # During developm
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.environ.get('GM_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('GM_PASS')
+EMAIL_HOST_USER = config['GM_USER']
+EMAIL_HOST_PASSWORD = config['GM_PASS']
 
