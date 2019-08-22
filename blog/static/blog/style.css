@@ -10,6 +10,7 @@ body {
   width: 80%;
   margin: auto;
   overflow: hidden;
+  box-sizing: content-box;
 }
 
 ul {
@@ -180,6 +181,12 @@ footer {
   color: white;
   background-color: #e8491d;
   text-align: center;
+}
+
+*, ::after, ::before {
+  -webkit-box-sizing: content-box !important;
+  -moz-box-sizing: content-box !important;
+  box-sizing: content-box !important;
 }
 
 /* media queries */
