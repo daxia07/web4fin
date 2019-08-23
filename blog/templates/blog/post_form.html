@@ -9,39 +9,10 @@
                 <legend class="border-bottom mb-4">
                     Blog Post
                 </legend>
+                {{ form.media }}
                 {{ form|crispy }}
-                <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
-                <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
-                <script>
-                    CKEDITOR.replace('id_content', {
-                        extraPlugins: 'autogrow',
-                        autoGrow_minHeight: 200,
-                        autoGrow_maxHeight: 600,
-                        autoGrow_bottomSpace: 50,
-                        removePlugins: 'resize',
-                        toolbar: 'Basic',
-                    });
-                </script>
-{#                <script>#}
-{#                    CKEDITOR.editorConfig = function( config ) {#}
-{#                    config.toolbar = [#}
-{#                        { name: 'document', items: [ 'Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates' ] },#}
-{#                        { name: 'clipboard', items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },#}
-{#                        { name: 'editing', items: [ 'Find', 'Replace', '-', 'SelectAll', '-', 'Scayt' ] },#}
-{#                        { name: 'forms', items: [ 'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField' ] },#}
-{#                        '/',#}
-{#                        { name: 'basicstyles', items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'CopyFormatting', 'RemoveFormat' ] },#}
-{#                        { name: 'paragraph', items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl', 'Language' ] },#}
-{#                        { name: 'links', items: [ 'Link', 'Unlink', 'Anchor' ] },#}
-{#                        { name: 'insert', items: [ 'Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe' ] },#}
-{#                        '/',#}
-{#                        { name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize' ] },#}
-{#                        { name: 'colors', items: [ 'TextColor', 'BGColor' ] },#}
-{#                        { name: 'tools', items: [ 'Maximize', 'ShowBlocks' ] },#}
-{#                        { name: 'about', items: [ 'About' ] }#}
-{#                    ];#}
-{#                };#}
-{#                </script>#}
+{#                <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>#}
+{#                <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>#}
                 <div class="form-group">
                     <button class="btn btn-outline-info" type="submit">Post</button>
                 </div>
