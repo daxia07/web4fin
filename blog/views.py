@@ -12,6 +12,12 @@ class PostListView(ListView):
     context_object_name = 'posts'
     ordering = ['-date_posted']
     paginate_by = 8
+ 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Home'
+        return context
+    
 
 
 class UserPostListView(ListView):
