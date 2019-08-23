@@ -9,13 +9,12 @@
     <meta name="keywords" content="web development, blog, recipe, life experience, phote albums"/>
     <meta name="author" content="Mingxia Li" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <!-- <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css'%}"> -->
     <link rel="stylesheet" type="text/css" href="{% static 'blog/style.css'%}"/>
 
     {% if title %}
-    <title>Prawn Dumpling Website - {{ title }}</title>
+    <title>Prawn Dumpling - {{ title }}</title>
     {% else %}
-    <title>Prawn Dumpling Website</title>
+    <title>Prawn Dumpling</title>
     {% endif %}
   </head>
   <body>
@@ -23,28 +22,38 @@
       <div class="container">
         <div id="branding">
           <h1>
-            <a href="{% url 'website-home'%}"><span class="highlight">Prawn Dumpling</span> Website</a>
+            <a href="{% url 'website-home'%}"><span class="highlight">Prawn </span> Dumpling</a>
           </h1>
         </div>
         <nav>
+          <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button> -->
           <ul>
             <li {%if title == 'Home' %}class="current"{% endif%}><a href="{% url 'blog-home'%}">Home</a></li>
             <li {%if title == 'About' %} class="current"{% endif%}><a href="{% url 'blog-about' %}">About</a></li>
             <li {%if title == 'Topic' %} class="current"{% endif%}><a href="#">Topics</a></li>
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'post-create' %}">New Post</a></li>
+                <li><a href="{% url 'profile' %}">Profile</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+
+            {% else %}
+                <li><a href="{% url 'login' %}">Login</a></li>
+                <li><a href="{% url 'register' %}">Register</a></li>
+            {% endif %}
           </ul>
         </nav>
       </div>
     </header>
     <main>
-      <div>
-        <div id="articles">
+        <div>
           {% if messages %} {% for message in messages %}
           <div class="alert alert-{{ message.tags }}">
             {{ message }}
           </div>
           {% endfor %} {% endif %} {% block content %}{% endblock %}
         </div>
-      </div>
     </main>
     <footer>
       <p>Prawn Dumpling Website, Copyright &copy;2019</p>
