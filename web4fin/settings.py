@@ -147,12 +147,18 @@ CKEDITOR_RESTRICT_BY_DATE = True
 CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': 'Custom',
+        # 'height': 500,
+        'width': '100%',
         'toolbar_Custom': [
-            ['Bold', 'Italic', 'Underline'],
-            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
-            ['Link', 'Unlink'],
-            ['RemoveFormat', 'Source']
-        ]
+            ['Styles', 'Format', 'Bold', 'Italic', 'Underline', 'Strike', 'SpellChecker', 'Udo'],
+            ['Link', 'Unlink', 'Anchor'],
+            ['Image', 'Flash', 'Table', 'HorizontalRule'],
+            ['TextColor', 'BGColor', 'CodeSnippet'],
+            ['Smiley', 'SpecialChar'], ['RemoveFormat', 'Source'],
+            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', ],
+        ],
+        'extraPlugins': ','.join(['codesnippet']),
+        # 'extraPlugins': ','.join(['codesnippet', 'Youtube']),
     },
     'awesome_ckeditor': {
         'toolbar': 'Basic',
