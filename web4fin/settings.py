@@ -147,8 +147,11 @@ CKEDITOR_RESTRICT_BY_DATE = True
 CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': 'Custom',
-        # 'height': 500,
+        'height': 500,
         'width': '100%',
+        'autoGrow_minHeight': 200,
+        'autoGrow_maxHeight': 600,
+        'autoGrow_bottomSpace': 50,
         'toolbar_Custom': [
             ['Styles', 'Format', 'Bold', 'Italic', 'Underline', 'Strike', 'SpellChecker', 'Udo'],
             ['Link', 'Unlink', 'Anchor'],
@@ -157,7 +160,7 @@ CKEDITOR_CONFIGS = {
             ['Smiley', 'SpecialChar'], ['RemoveFormat', 'Source'],
             ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', ],
         ],
-        'extraPlugins': ','.join(['codesnippet']),
+        'extraPlugins': ','.join(['codesnippet', 'autogrow']),
         # 'extraPlugins': ','.join(['codesnippet', 'Youtube']),
     },
     'awesome_ckeditor': {
