@@ -17,12 +17,7 @@
             </fieldset>
         </form>
     </div>
-{#    <script>#}
-{#        CKEDITOR.on('instanceReady',#}
-{#           function( evt )#}
-{#           {#}
-{#             var editor = evt.editor;#}
-{#             editor.execCommand('maximize');#}
-{#           });#}
-{#    </script>#}
+    <script>
+        document.getElementsByClassName('django-ckeditor-widget')[0].removeAttribute('style');
+    </script>
 {% endblock content %}
