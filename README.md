@@ -2,12 +2,12 @@
 personal website
 
 #FINISHED:
+  1. RichText with ckeditor 5
   2. solve security issues: including selinux and autoescape|safe
   3. use domain name
 
 # TODO:
   1. improve appearance with semantic ui
-  2. RichText with ckeditor 5
   3. provide gallery function
   4. use React, GraphQL and django background
   5. enable comment and authorization control
