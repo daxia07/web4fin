@@ -31,7 +31,7 @@ def profile(request):
             messages.success(request, f'Your account has been updated!')
             current_path = request.user.profile.image.path
             if origin_path != current_path:
-                # remove
+                # TODO: remove other thumbnails
                 os.remove(origin_path)
             return redirect('profile')
 
