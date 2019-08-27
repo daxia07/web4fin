@@ -35,11 +35,15 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # plug in
     'ckeditor',
     'ckeditor_uploader',
     'crispy_forms',
+    'easy_thumbnails',
+    # apps
     'blog.apps.BlogConfig',
     'users.apps.UsersConfig',
+    # framework
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -179,4 +183,11 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = config['GM_USER']
 EMAIL_HOST_PASSWORD = config['GM_PASS']
+
+THUMBNAIL_ALIASES = {
+    '': {
+        'avatar': {'size': (40, 40), 'crop': True},
+        'avatar_lg': {'size': (125, 125), 'crop': True},
+    },
+}
 
