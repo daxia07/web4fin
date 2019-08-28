@@ -1,87 +1,36 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
+{% block head %}
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <meta name="description" content="Personal Website" />
-    <meta name="keywords" content="development, full stack, blog, recipe, travel, albums"/>
-    <meta name="author" content="Mingxia Li" />
-    <meta property="og:site_name" content="Prawn Dumpling" />
-    <meta property="og:type" content="website" />
-    <meta property="og:locale" content="en_AU" />
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="shortcut icon" type="image/png" href="{% static 'blog/favicon.ico' %}"/>
-    <link rel="stylesheet" type="text/css" href="{% static 'blog/style.css'%}"/>
-
-    {% if title %}
-    <title>Prawn Dumpling - {{ title }}</title>
-    {% else %}
-    <title>Prawn Dumpling</title>
-    {% endif %}
+    {% include 'blog/base_head.html' %}
+    {% block title %}
+        {% if title %}
+            <title>Prawn Dumpling - {{ title }}</title>
+        {% else %}
+            <title>Prawn Dumpling</title>
+        {% endif %}
+    {% endblock title %}
   </head>
+{% endblock head %}
+
   <body>
     <header>
-      <div class="container">
-        <div id="branding">
-          <h1>
-            <a href="{% url 'website-home'%}"><span class="highlight">Prawn </span> Dumpling</a>
-          </h1>
-        </div>
-        <nav>
-          <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-          </button> -->
-          <ul>
-            <li {%if title == 'Home' %}class="current"{% endif%}><a href="{% url 'blog-home'%}">Home</a></li>
-            <li {%if title == 'About' %} class="current"{% endif%}><a href="{% url 'blog-about' %}">About</a></li>
-            <!-- <li {%if title == 'Topic' %} class="current"{% endif%}><a href="#">Topics</a></li> -->
-            {% if user.is_authenticated %}
-                <li><a href="{% url 'post-create' %}">New Post</a></li>
-                <li><a href="{% url 'profile' %}">Profile</a></li>
-                <li><a href="{% url 'logout' %}">Logout</a></li>
-
-            {% else %}
-                <li><a href="{% url 'login' %}">Login</a></li>
-                <li><a href="{% url 'register' %}">Register</a></li>
-            {% endif %}
-          </ul>
-        </nav>
-      </div>
+        {% include 'blog/base_header.html' %}
     </header>
     <main>
         <div>
-          {% if messages %} {% for message in messages %}
-          <div class="alert alert-{{ message.tags }}">
-            {{ message }}
-          </div>
-          {% endfor %} {% endif %} {% block content %}{% endblock %}
+          {% include 'blog/base_message.html' %}
+
+        {% block content %}
+        {% endblock %}
+
         </div>
     </main>
     <footer>
-      <p>Prawn Dumpling Website, Copyright &copy;2019</p>
+        {% include 'blog/base_footer.html' %}
     </footer>
-    <!-- scripts -->
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-      crossorigin="anonymous"></script>
-    <!--[if lt IE 9]>
-      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <![endif]-->
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-      crossorigin="anonymous"></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-      crossorigin="anonymous"></script>
-    <link rel="stylesheet"
-      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/default.min.css">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
+        {% include 'blog/base_bootstrap.html' %}
   </body>
 </html>
