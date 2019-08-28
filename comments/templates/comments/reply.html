@@ -1,0 +1,55 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <form action="." method="POST" id="reply_form">
+        {% csrf_token %}
+        <div class="form-group">
+            <div id="test">
+                {{ comment_form.media }}
+                {{ comment_form.body }}
+            </div>
+        </div>
+    </form>
+    <button onclick="comfirm_submin ({{ article_id }}, {{ parent_comment_id }})" class="btn btn-primary">
+        send
+    </button>
+    <script></script>
+    <script></script>
+    <script></script>
+
+    <!-- csrf token -->
+    <script></script>
+
+    <script>
+        $(function(){
+           $(".django-ckeditor-widget").removeAttr('style');
+        });
+
+        function confirm_submit(article_id, comment_id) {
+            let content = CKEDITOR.instances['id_body'].getData();
+            $.ajax({
+                url: '/comment/post-comment' + article_id + '/' + comment_id,
+                type: 'POST',
+                data: {
+                    body: content,
+                    //'CSRFToken': getCSRFTokenValue()
+                },
+                success: function (e) {
+                    if (e === '200 OK'){
+                        parent.location.reload()
+                    }
+                }
+            })
+        }
+    </script>
+</body>
+</html>

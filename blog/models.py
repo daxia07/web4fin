@@ -1,8 +1,10 @@
 from django.contrib.auth.models import User
+from django.contrib.contenttypes.fields import GenericRelation
 from django.urls import reverse
 from django.utils import timezone
 from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
+from comments.models import Comment
 
 
 class Post(models.Model):
@@ -10,6 +12,7 @@ class Post(models.Model):
     content = RichTextUploadingField(config_name='default')
     date_posted = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+    val_obj = GenericRelation(Comment, object_id_field='val_id', related_query_name='post')
 
     def __str__(self):
         return self.title

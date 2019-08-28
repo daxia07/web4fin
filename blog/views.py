@@ -1,9 +1,12 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
+from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.db.models import Q
 
 from .models import Post
+from comments.models import Comment
 
 
 class PostListView(ListView):
@@ -17,7 +20,6 @@ class PostListView(ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Home'
         return context
-    
 
 
 class UserPostListView(ListView):
@@ -33,6 +35,15 @@ class UserPostListView(ListView):
 
 class PostDetailView(DetailView):
     model = Post
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        content_type = ContentType.objects.get_for_model(Post)
+        post_id = self.kwargs.get('pk')
+        var_filter = Q(object_id=post_id) & Q(content_type=content_type)
+        comments = Comment.objects.filter(var_filter)
+        context['comments'] = comments
+        return context
 
 
 class PostCreateView(LoginRequiredMixin, CreateView):

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'crispy_forms',
     'easy_thumbnails',
+    'mptt',
     # apps
     'blog.apps.BlogConfig',
     'users.apps.UsersConfig',
