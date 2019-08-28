@@ -191,3 +191,5 @@ THUMBNAIL_ALIASES = {
     },
 }
 
+if DEBUG:
+    DATABASES['default']['NAME'] = 'test' + DATABASES['default']['NAME']
