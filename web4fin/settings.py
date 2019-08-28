@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     # apps
     'blog.apps.BlogConfig',
     'users.apps.UsersConfig',
+    'comments.apps.CommentsConfig',
     # framework
     'django.contrib.admin',
     'django.contrib.auth',

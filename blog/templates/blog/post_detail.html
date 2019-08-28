@@ -17,4 +17,10 @@
         <p class="article-content">{% autoescape off %}{{ object.content|safe }}{% endautoescape %}</p>
       </div>
     </article>
+    <div>
+        {% for comment in object.comment_set.all %}
+            {{ comment.author }}
+            {{ comment.content }}
+        {% endfor %}
+    </div>
 {% endblock content %}
