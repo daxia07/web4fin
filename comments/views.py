@@ -10,6 +10,11 @@ from .models import Comment
 @login_required(login_url='/login/')
 def post_comment(request, article_id, parent_comment_id=None):
     article = get_object_or_404(Post, id=article_id)
+    initial_data = {
+        "content_type": article.get_content_type,
+        "object_id": article.id
+    }
+    comment_form = CommentForm(request.POST or None, initial=initial_data)
     if request.method == 'POST':
         comment_form = CommentForm(request.POST)
         if comment_form.is_valid():
@@ -30,8 +35,9 @@ def post_comment(request, article_id, parent_comment_id=None):
         else:
             return HttpResponse("The form is incorrect, please fill in again")
     elif request.method == 'GET':
-        comments = Comment.objects.filter(object_id=article_id, content_object=Post)
+        comments = Comment.objects.filter_by_instance(article)
         context = {
-            'comments': comments
+            'comments': comments,
+            'comment_form': comment_form
         }
         return render(request, 'comments/reply.html', context)

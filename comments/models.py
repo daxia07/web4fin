@@ -9,8 +9,7 @@ from mptt.models import MPTTModel, TreeForeignKey, TreeManager
 class CommentManager(TreeManager):
     def filter_by_instance(self, instance):
         content_type = ContentType.objects.get_for_model(instance.__class__)
-        object_id = instance.id
-        var_filter = Q(object_id=object_id) & Q(content_type=content_type)
+        var_filter = Q(object_id=instance.id) & Q(content_type=content_type)
         return super(CommentManager, self).filter(var_filter)
 
 

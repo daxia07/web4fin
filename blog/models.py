@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericRelation
+from django.contrib.contenttypes.models import ContentType
 from django.urls import reverse
 from django.utils import timezone
 from django.db import models
@@ -19,3 +20,11 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('post-detail', kwargs={'pk': self.pk})
+
+    @property
+    def comments(self):
+        return Comment.objects.filter_by_instance(self)
+
+    @property
+    def get_content_type(self):
+        return ContentType.objects.get_for_model(self.__class__)

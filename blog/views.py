@@ -1,10 +1,9 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
-from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.db.models import Q
 
+from comments.forms import CommentForm
 from .models import Post
 from comments.models import Comment
 
@@ -38,12 +37,14 @@ class PostDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # content_type = ContentType.objects.get_for_model(Post)
-        # post_id = self.kwargs.get('pk')
-        # var_filter = Q(object_id=post_id) & Q(content_type=content_type)
-        # comments = Comment.objects.filter(var_filter)
         comments = Comment.objects.filter_by_instance(self.object)
+        initial_data = {
+            "content_type": Post,
+            "object_id": self.kwargs['pk']
+        }
+        comment_form = CommentForm(self.request.POST or None, initial=initial_data)
         context['comments'] = comments
+        context['comment_form'] = comment_form
         return context
 
 
