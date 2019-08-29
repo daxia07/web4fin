@@ -4,6 +4,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.db.models import Q
 from mptt.models import MPTTModel, TreeForeignKey, TreeManager
+from ckeditor.fields import RichTextField
 
 
 class CommentManager(TreeManager):
@@ -19,7 +20,7 @@ class Comment(MPTTModel):
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', 'object_id')
     # post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    content = models.TextField(blank=False)
+    content = RichTextField(config_name='comments', blank=False)
     created = models.DateTimeField(auto_now_add=True)
 
     parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
@@ -29,6 +30,9 @@ class Comment(MPTTModel):
 
     class MPTTMeta:
         order_insertion_by = ['created']
+
+    class Meta:
+        ordering = ['tree_id', 'lft']
 
     def __unicode__(self):
         return str(self.author.username)

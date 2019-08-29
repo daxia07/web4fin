@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.contenttypes.models import ContentType
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 
@@ -19,7 +20,8 @@ def post_comment(request, post_id, parent_comment_id=None):
         comment_form = CommentForm(request.POST)
         if comment_form.is_valid():
             new_comment = comment_form.save(commit=False)
-            new_comment.content_type = Post
+            content_type = ContentType.objects.get_for_model(article.__class__)
+            new_comment.content_type = content_type
             new_comment.object_id = post_id
             new_comment.author = request.user
 
