@@ -1,9 +1,11 @@
 {% load mptt_tags %}
+{% load crispy_forms_tags %}
 <div>
     <p class="lead">Comments</p>
-    <form action="." method="POST">
+    <form action="{% url 'post_comment' object.id %}" method="POST">
         {% csrf_token %}
-        {{ comment_form }}
+        {{ comment_form.media }}
+        {{ comment_form|crispy }}
         <input type="submit" value="Post comment" class="btn btn-default">
     </form>
 
@@ -61,6 +63,9 @@
             {% endwith %}
         {% endrecursetree %}
     </div>
+    <script>
+        document.getElementsByClassName('django-ckeditor-widget')[0].removeAttribute('style');
+    </script>
 
 {#    {% block script %}#}
 {#        <script>#}

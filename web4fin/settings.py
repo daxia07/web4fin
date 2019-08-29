@@ -169,8 +169,17 @@ CKEDITOR_CONFIGS = {
         'extraPlugins': ','.join(['codesnippet', 'autogrow']),
         # 'extraPlugins': ','.join(['codesnippet', 'Youtube']),
     },
-    'awesome_ckeditor': {
+    'comments': {
         'toolbar': 'Basic',
+        'toolbar_Basic': [
+            ['Styles', 'Format', 'Bold', 'Italic', 'Underline', 'Strike', 'SpellChecker', 'Udo'],
+            ['Link', 'Unlink', 'Anchor'],
+            ['Table', 'HorizontalRule'],
+            ['TextColor', 'BGColor', 'CodeSnippet'],
+            ['Smiley', 'SpecialChar'], ['RemoveFormat', 'Source'],
+            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', ],
+        ],
+        'extraPlugins': ','.join(['codesnippet', 'autogrow']),
     },
 }
 

@@ -8,8 +8,8 @@ from .models import Comment
 
 
 @login_required(login_url='/login/')
-def post_comment(request, article_id, parent_comment_id=None):
-    article = get_object_or_404(Post, id=article_id)
+def post_comment(request, post_id, parent_comment_id=None):
+    article = get_object_or_404(Post, id=post_id)
     initial_data = {
         "content_type": article.get_content_type,
         "object_id": article.id
@@ -20,7 +20,7 @@ def post_comment(request, article_id, parent_comment_id=None):
         if comment_form.is_valid():
             new_comment = comment_form.save(commit=False)
             new_comment.content_type = Post
-            new_comment.object_id = article_id
+            new_comment.object_id = post_id
             new_comment.author = request.user
 
             if parent_comment_id:
