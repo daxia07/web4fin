@@ -38,10 +38,11 @@ class PostDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        content_type = ContentType.objects.get_for_model(Post)
-        post_id = self.kwargs.get('pk')
-        var_filter = Q(object_id=post_id) & Q(content_type=content_type)
-        comments = Comment.objects.filter(var_filter)
+        # content_type = ContentType.objects.get_for_model(Post)
+        # post_id = self.kwargs.get('pk')
+        # var_filter = Q(object_id=post_id) & Q(content_type=content_type)
+        # comments = Comment.objects.filter(var_filter)
+        comments = Comment.objects.filter_by_instance(self.object)
         context['comments'] = comments
         return context
 
