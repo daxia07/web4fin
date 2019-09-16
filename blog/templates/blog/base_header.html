@@ -11,6 +11,7 @@
       <ul>
         <li {%if title == 'Home' %}class="current"{% endif%}><a href="{% url 'blog-home'%}">Home</a></li>
         <li {%if title == 'About' %} class="current"{% endif%}><a href="{% url 'blog-about' %}">About</a></li>
+        <li><a href="{% url 'recipe' %}">Recipes</a></li>
         <!-- <li {%if title == 'Topic' %} class="current"{% endif%}><a href="#">Topics</a></li> -->
         {% if user.is_authenticated %}
             <li><a href="{% url 'post-create' %}">New Post</a></li>

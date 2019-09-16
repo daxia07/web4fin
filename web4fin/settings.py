@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'easy_thumbnails',
     'mptt',
     # apps
+    'pg.apps.PgConfig',
     'blog.apps.BlogConfig',
     'users.apps.UsersConfig',
     'comments.apps.CommentsConfig',
